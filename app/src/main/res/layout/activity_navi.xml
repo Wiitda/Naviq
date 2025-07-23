@@ -80,7 +80,7 @@
             android:paddingHorizontal="14dp"/>
     </LinearLayout>
 
-<!--  하단 바  -->
+    <!--  하단 바  -->
     <LinearLayout
         android:id="@+id/bottom_nav"
         android:layout_width="303dp"
@@ -148,8 +148,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
