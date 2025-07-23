@@ -15,9 +15,17 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // 🔑 local.properties에서 kakao_api_key 값 읽어서 BuildConfig 변수로 설정
+        def localProperties = new Properties()
+        localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+        def kakaoApiKey = localProperties.getProperty("kakao_api_key")
+        buildConfigField "String", "KAKAO_API_KEY", "\"${kakaoApiKey}\""
     }
 
+
     buildFeatures{
+        buildConfig = true
         viewBinding = true
     }
 

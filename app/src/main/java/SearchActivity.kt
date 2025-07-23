@@ -32,7 +32,7 @@ class SearchActivity : AppCompatActivity() {
 
     companion object {
         const val LOCATION_PERMISSION_REQUEST_CODE = 1001
-        const val KAKAO_API_KEY = "c794276b1eba611b6ee540c31fdda093"  // ← 필수로 본인 키로 교체
+        val apiKey = BuildConfig.KAKAO_API_KEY
     }
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -169,7 +169,7 @@ class SearchActivity : AppCompatActivity() {
         return try {
             val conn = URL(url).openConnection() as HttpURLConnection
             conn.requestMethod = "GET"
-            conn.setRequestProperty("Authorization", "KakaoAK $KAKAO_API_KEY") // ✅ 수정된 부분
+            conn.setRequestProperty("Authorization", "KakaoAK $apiKey") // ✅ 수정된 부분
 
             val reader = BufferedReader(InputStreamReader(conn.inputStream))
             val response = reader.readText()
