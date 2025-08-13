@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frame_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 지도 -->
+    <com.kakao.vectormap.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 상단: 뒤로가기 + 가운데 필 토글 (66dp 유지, 잘림 방지) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="12dp"
+        android:clipToPadding="false">
+
+        <!-- 뒤로가기 -->
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_left"
+            app:tint="#222222"
+            android:contentDescription="@string/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 필 토글 캡슐 (부모 top 기준, 66dp 그대로) -->
+        <FrameLayout
+            android:id="@+id/segmented_container"
+            android:layout_width="225dp"
+            android:layout_height="66dp"
+            android:layout_marginTop="-14dp"
+            android:background="@drawable/bg_segment_pill"
+            android:elevation="6dp"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- 토글 그룹 -->
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/tg_routes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_origin"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:minWidth="0dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:text="기존 경로"
+                    android:textColor="@color/black"
+                    app:checkedIndicator="@null"
+                    app:cornerRadius="20dp"
+                    app:rippleColor="@android:color/transparent" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_detour"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:minWidth="0dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    android:text="우회 경로"
+                    android:textColor="@color/black"
+                    app:checkedIndicator="@null"
+                    app:cornerRadius="20dp"
+                    app:rippleColor="@android:color/transparent" />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <!-- 가운데 세로 구분선 (오버레이, 윗/아래 여백으로 스트로크와 겹침 방지) -->
+            <View
+                android:id="@+id/divider_center"
+                android:layout_width="1dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#D9D9D9"
+                android:clickable="false"
+                android:focusable="false" />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 하단 네비 바 (둥근 상단) -->
+    <LinearLayout
+        android:id="@+id/navi_bar"
+        android:layout_width="match_parent"
+        android:layout_height="276dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_navi_bar"
+        android:orientation="vertical"
+        android:elevation="16dp"
+        android:paddingTop="40dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp">
+
+        <!-- 회색 패널: 경로 정보 -->
+        <TextView
+            android:id="@+id/tv_route_delta"
+            android:layout_width="match_parent"
+            android:layout_height="148dp"
+            android:background="@drawable/bg_pannel_gray"
+            android:text="경로 정보를 불러오는 중…"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:gravity="top"
+            android:paddingLeft="12dp"
+            android:paddingTop="12dp"/>
+
+        <!-- 안내 시작 버튼 -->
+        <Button
+            android:id="@+id/btn_start_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="18dp"
+            android:text="안내 시작"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_btn_primary" />
+    </LinearLayout>
+
+</FrameLayout>

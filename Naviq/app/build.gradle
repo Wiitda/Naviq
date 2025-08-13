@@ -1,0 +1,87 @@
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
+}
+
+
+android {
+    namespace 'com.example.nav'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.example.nav"
+        minSdk 26
+        targetSdk 36
+        versionCode 1
+        versionName "1.0"
+
+        // ABI 필터 설정 (APK 용량 최적화용)
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a"
+        }
+
+        // local.properties에서 kakao_api_key 값 읽기
+        def localProperties = new Properties()
+        localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+        def kakaoNativeKey = localProperties.getProperty("KAKAO_NATIVE_APP_KEY")
+        buildConfigField "String", "KAKAO_NATIVE_APP_KEY", "\"${kakaoNativeKey}\""
+
+        def skAppKey = localProperties.getProperty("SK_APP_KEY")
+        buildConfigField "String", "SK_APP_KEY", "\"${skAppKey}\""
+
+        buildConfigField "String", "SAFETY_DATA_KEY", "\"${localProperties.getProperty('SAFETY_DATA_KEY')}\""
+        buildConfigField "String", "KAKAO_REST_API_KEY", "\"${localProperties.getProperty('KAKAO_REST_API_KEY')}\""
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures{
+        buildConfig = true
+        viewBinding = true
+        dataBinding = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    kapt {
+        correctErrorTypes = true
+    }
+        }
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.kakaomobility.knsdk:knsdk_ui:1.9.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.kakao.maps.open:android:2.12.8'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    // Hilt
+    implementation ("com.google.dagger:hilt-android:$hiltVersion")
+    implementation libs.androidx.databinding.runtime
+    kapt ("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+    implementation libs.transportation.consumer
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+}
