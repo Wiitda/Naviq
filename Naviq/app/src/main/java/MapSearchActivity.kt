@@ -37,16 +37,16 @@ class MapSearchActivity : AppCompatActivity() {
         searchInput = findViewById(R.id.search_input)
         recyclerView = findViewById(R.id.recycler_view)
 
-        // ✅ 뒤로가기 버튼: 이전 화면으로
+        // 뒤로가기 버튼: 이전 화면으로
         findViewById<ImageButton>(R.id.btn_back).setOnClickListener { finish() }
 
-        // ✅ 검색박스 전체를 눌러도 EditText에 포커스가 가도록
+        // 검색박스 전체를 눌러도 EditText에 포커스가 가도록
         findViewById<LinearLayout>(R.id.search_box)?.setOnClickListener {
             searchInput.requestFocus()
             showKeyboard()
         }
 
-        // ✅ 화면 진입 시 자동으로 포커스 + 키보드 표시
+        // 화면 진입 시 자동으로 포커스 + 키보드 표시
         searchInput.requestFocus()
         showKeyboard()
 

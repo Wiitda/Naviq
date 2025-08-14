@@ -56,6 +56,7 @@
                 app:selectionRequired="true"
                 app:singleSelection="true">
 
+                <!-- 선택 시 배경/리플 제거: backgroundTint, rippleColor 투명 -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_origin"
                     style="@style/Widget.Material3.Button.TextButton"
@@ -66,9 +67,11 @@
                     android:paddingEnd="18dp"
                     android:text="기존 경로"
                     android:textColor="@color/black"
-                    app:checkedIndicator="@null"
+                    android:checkable="true"
+                    app:checkedIcon="@null"
                     app:cornerRadius="20dp"
-                    app:rippleColor="@android:color/transparent" />
+                    app:rippleColor="@android:color/transparent"
+                    app:backgroundTint="@android:color/transparent" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_detour"
@@ -80,9 +83,11 @@
                     android:paddingEnd="18dp"
                     android:text="우회 경로"
                     android:textColor="@color/black"
-                    app:checkedIndicator="@null"
+                    android:checkable="true"
+                    app:checkedIcon="@null"
                     app:cornerRadius="20dp"
-                    app:rippleColor="@android:color/transparent" />
+                    app:rippleColor="@android:color/transparent"
+                    app:backgroundTint="@android:color/transparent" />
             </com.google.android.material.button.MaterialButtonToggleGroup>
 
             <!-- 가운데 세로 구분선 (오버레이, 윗/아래 여백으로 스트로크와 겹침 방지) -->
@@ -106,7 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="276dp"
         android:layout_gravity="bottom"
-        android:background="@drawable/bg_navi_bar"
+        android:background="@android:color/transparent"
         android:orientation="vertical"
         android:elevation="16dp"
         android:paddingTop="40dp"
@@ -117,12 +122,13 @@
         <TextView
             android:id="@+id/tv_route_delta"
             android:layout_width="match_parent"
-            android:layout_height="148dp"
+            android:layout_height="100dp"
             android:background="@drawable/bg_pannel_gray"
             android:text="경로 정보를 불러오는 중…"
             android:textColor="#FFFFFF"
             android:textSize="14sp"
             android:gravity="top"
+            android:layout_marginTop="48dp"
             android:paddingLeft="12dp"
             android:paddingTop="12dp"/>
 
@@ -131,11 +137,12 @@
             android:id="@+id/btn_start_navigation"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="12dp"
             android:text="안내 시작"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:background="@drawable/bg_btn_primary" />
+            android:background="@drawable/bg_btn_primary"
+            app:backgroundTint="@null" />
     </LinearLayout>
 
 </FrameLayout>

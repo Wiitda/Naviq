@@ -18,5 +18,7 @@ data class CoordZipData(
     val startLatitude: String?,
     val startLongitude: String?,
     val endLatitude: String?,
-    val endLongitude: String?
+    val endLongitude: String?,
+    val viaLatitude: String? = null,
+    val viaLongitude: String? = null
 )

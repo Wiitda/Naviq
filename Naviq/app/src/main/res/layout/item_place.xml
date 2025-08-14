@@ -13,7 +13,7 @@
         android:text="장소 이름"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#000000" />
+        android:textColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/address_name"
@@ -21,5 +21,5 @@
         android:layout_height="wrap_content"
         android:text="주소"
         android:textSize="14sp"
-        android:textColor="#666666" />
+        android:textColor="#CCCCCC" />
 </LinearLayout>
